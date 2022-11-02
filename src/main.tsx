@@ -4,7 +4,7 @@ import App from "./App";
 // 初始化样式
 import "reset-css";
 // Ui框架的样式
-
+import "antd/dist/antd.css";
 // 系统样式
 import "src/assets/styles/global.scss";
 
@@ -13,4 +13,3 @@ ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
     <App />
   </React.StrictMode>
 );
-

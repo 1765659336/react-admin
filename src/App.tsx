@@ -1,13 +1,16 @@
-import Cop1 from "./components/Cop1/index";
-import Cop2 from "./components/Cop2/index";
-function App() {
-  return (
-    <div className="App">
-      App
-      <Cop1></Cop1>
-      <Cop2></Cop2>
-    </div>
-  );
-}
-export default App;
+import { Button } from "antd";
+import React from "react";
+import { QuestionCircleOutlined } from "@ant-design/icons";
+const App: React.FC = () => (
+  <>
+    <Button type="primary">Primary Button</Button>
+    <Button>Default Button</Button>
+    <Button type="dashed">Dashed Button</Button>
+    <br />
+    <Button type="text">Text Button</Button>
+    <Button type="link">Link Button</Button>
+    <QuestionCircleOutlined style={{ fontSize: "40px", color: "red" }} />
+  </>
+);
 
+export default App;
