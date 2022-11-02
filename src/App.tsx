@@ -1,16 +1,15 @@
-import { Button } from "antd";
 import React from "react";
-import { QuestionCircleOutlined } from "@ant-design/icons";
-const App: React.FC = () => (
-  <>
-    <Button type="primary">Primary Button</Button>
-    <Button>Default Button</Button>
-    <Button type="dashed">Dashed Button</Button>
-    <br />
-    <Button type="text">Text Button</Button>
-    <Button type="link">Link Button</Button>
-    <QuestionCircleOutlined style={{ fontSize: "40px", color: "red" }} />
-  </>
-);
+import { useRoutes, Link } from "react-router-dom";
+import router from "src/router";
+const App: React.FC = () => {
+  const outlet = useRoutes(router);
+  return (
+    <>
+      <Link to="/home">home</Link>
+      <Link to="/about">about</Link>
+      {outlet}
+    </>
+  );
+};
 
 export default App;
