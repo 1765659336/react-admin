@@ -6,10 +6,11 @@ import "reset-css";
 // Ui框架的样式
 
 // 系统样式
-import "./assets/styles/global.scss";
+import "src/assets/styles/global.scss";
 
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
   <React.StrictMode>
     <App />
   </React.StrictMode>
 );
+
