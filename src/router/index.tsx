@@ -1,7 +1,8 @@
 import React, { lazy } from "react";
 import Home from "../views/Home";
+import Col1 from "../components/Cop1";
 const About = lazy(() => import("../views/About"));
-const Col1 = lazy(() => import("../components/Cop1"));
+// const Col1 = lazy(() => import("../components/Cop1"));
 const Col2 = lazy(() => import("../components/Cop2"));
 
 // Navigate重定向组件
@@ -16,7 +17,7 @@ const withLoadingComponent = (comp: JSX.Element) => {
 const routes = [
   {
     path: "/",
-    element: <Navigate to="/home" />,
+    element: <Navigate to="/home/col1" />,
   },
   {
     path: "/home",
@@ -24,7 +25,7 @@ const routes = [
     children: [
       {
         path: "/home/col1",
-        element: withLoadingComponent(<Col1 />),
+        element: <Col1 />,
       },
       {
         path: "/home/col2",
