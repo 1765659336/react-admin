@@ -49,10 +49,19 @@ const App: React.FC = () => {
 
   const navigate = useNavigate();
 
+  // 设置展开的下拉菜单
+  const [openKeys, setOpenKeys] = useState(["sub1"]);
+
   // 菜单点击事件
   const menuClick = (e: { key: string }) => {
     console.log("点击了菜单", e.key);
     navigate(e.key);
+  };
+
+  // 展开/收缩
+  const onOpenChange: MenuProps["onOpenChange"] = (keys: string[]) => {
+    // 将展开数据的最后一项，也就是刚才点开的那项赋值给展开的数据，实现只能同时展开一个菜单
+    setOpenKeys([keys[keys.length - 1]]);
   };
 
   return (
@@ -65,10 +74,12 @@ const App: React.FC = () => {
         <div className={style.logo} />
         <Menu
           theme="dark"
-          defaultSelectedKeys={["1"]}
+          defaultSelectedKeys={["/home/col1"]}
           mode="inline"
           items={items}
+          openKeys={openKeys}
           onClick={menuClick}
+          onOpenChange={onOpenChange}
         />
       </Sider>
       <Layout className={style["site-layout"]}>
