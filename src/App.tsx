@@ -1,15 +1,9 @@
 import React from "react";
-import { useRoutes, Link } from "react-router-dom";
+import { useRoutes } from "react-router-dom";
 import router from "src/router";
 const App: React.FC = () => {
   const outlet = useRoutes(router);
-  return (
-    <>
-      <Link to="/home">home</Link>
-      <Link to="/about">about</Link>
-      {outlet}
-    </>
-  );
+  return <>{outlet}</>;
 };
 
 export default App;
