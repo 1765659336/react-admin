@@ -1,11 +1,12 @@
 import React, { lazy } from "react";
 import Home from "../views/Home";
-import User from "../views/User";
+import Login from "../views/Login";
 const About = lazy(() => import("../views/About"));
 const Col1 = lazy(() => import("../components/Cop1"));
 const Col2 = lazy(() => import("../components/Cop2"));
 const NotFonud = lazy(() => import("../views/NotFonud"));
 const Role = lazy(() => import("../views/Role"));
+const User = lazy(() => import("../views/User"));
 
 // Navigate重定向组件
 import { Navigate } from "react-router-dom";
@@ -19,7 +20,7 @@ const withLoadingComponent = (comp: JSX.Element) => {
 const routes = [
   {
     path: "/",
-    element: <Navigate to="/home/users" />,
+    element: <Navigate to="/login" />,
   },
   {
     path: "/home",
@@ -41,7 +42,7 @@ const routes = [
     children: [
       {
         path: "/home/users",
-        element: <User />,
+        element: withLoadingComponent(<User />),
       },
       {
         path: "/home/roles",
@@ -52,6 +53,10 @@ const routes = [
   {
     path: "/about",
     element: withLoadingComponent(<About />),
+  },
+  {
+    path: "/login",
+    element: <Login />,
   },
   {
     path: "*",
