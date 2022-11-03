@@ -2,7 +2,7 @@ import React, { lazy } from "react";
 import Home from "../views/Home";
 import User from "../views/User";
 const About = lazy(() => import("../views/About"));
-const Col1 = lazy(() => import("../components/Cop2"));
+const Col1 = lazy(() => import("../components/Cop1"));
 const Col2 = lazy(() => import("../components/Cop2"));
 const NotFonud = lazy(() => import("../views/NotFonud"));
 const Role = lazy(() => import("../views/Role"));
