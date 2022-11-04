@@ -1,18 +1,20 @@
 import { deepCloneObj } from "src/utils/data";
 import store from "./store";
-
+import { renderActionName } from "../common";
+const actionName = renderActionName(store);
 const reducer = (
   state = store.state,
-  action: { type: string; value: Array<any> }
+  action: {
+    actionName: string;
+    type: string;
+    value: number;
+    dis?: Function;
+  }
 ) => {
-  // 浅拷贝
+  // 深拷贝
   let newState = deepCloneObj(state);
-  switch (action.type) {
-    case "changeArr":
-      store.action.changeArr(newState, action);
-      break;
-    default:
-      break;
+  if (actionName[action.type]) {
+    actionName[action.type](newState, action);
   }
   return newState;
 };

@@ -14,13 +14,24 @@ const User: React.FC = () => {
   const dispatch = useDispatch();
 
   const changeNum = () => {
-    dispatch({ type: "changeNum", value: num + 1 });
+    dispatch({ actionName: "action", type: "changeNum", value: num + 1 });
   };
 
   const changeArr = () => {
     const newArr = deepCloneObj(arr);
     newArr.push(num);
-    dispatch({ type: "changeArr", value: newArr });
+    dispatch({ actionName: "action", type: "changeArr", value: newArr });
+  };
+
+  const changeNumAsync = () => {
+    dispatch((dis: Function) => {
+      dispatch({
+        actionName: "actionAsync",
+        type: "changeNumAsync",
+        value: num + 1,
+        dis: dis,
+      });
+    });
   };
 
   return (
@@ -29,6 +40,7 @@ const User: React.FC = () => {
       <p>{num}</p>
       <p>{arr}</p>
       <button onClick={changeNum}>num++</button>
+      <button onClick={changeNumAsync}>async-num++</button>
       <button onClick={changeArr}>ArrChange</button>
     </div>
   );

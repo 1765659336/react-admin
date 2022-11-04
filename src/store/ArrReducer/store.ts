@@ -1,8 +1,9 @@
-const store = {
+const store: IStore<{
+  arr: Array<any>;
+}> = {
   state: {
-    arr: [] as Array<any>,
+    arr: [],
   },
-
   action: {
     changeArr: (
       newState: { arr: Array<any> },
@@ -11,6 +12,7 @@ const store = {
       newState.arr = action.value;
     },
   },
+  actionAsync: {},
 };
 
 export default store;

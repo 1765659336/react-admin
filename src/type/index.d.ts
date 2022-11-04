@@ -8,3 +8,17 @@ interface Window {
   __REDUX_DEVTOOLS_EXTENSION__: function;
   __REDUX_DEVTOOLS_EXTENSION_COMPOSE__: function;
 }
+
+declare type StoreAction = {
+  changeNum?: Function;
+  changeArr?: Function;
+};
+
+declare type StoreActionAsync = {
+  changeNumAsync?: Function;
+};
+declare interface IStore<T> {
+  state?: T;
+  action: StoreAction;
+  actionAsync: StoreActionAsync;
+}
