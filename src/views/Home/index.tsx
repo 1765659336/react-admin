@@ -10,6 +10,7 @@ const App: React.FC = () => {
   const [collapsed, setCollapsed] = useState(false);
   const navigate = useNavigate();
   const quitLogin = () => {
+    localStorage.removeItem("token");
     navigate("/login");
   };
   return (
@@ -19,9 +20,7 @@ const App: React.FC = () => {
         collapsed={collapsed}
         onCollapse={(value) => setCollapsed(value)}
       >
-        <div className={style.logo}>
-          
-        </div>
+        <div className={style.logo}></div>
         <MainMenu></MainMenu>
       </Sider>
       <Layout className={style["site-layout"]}>

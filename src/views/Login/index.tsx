@@ -2,17 +2,22 @@ import React from "react";
 import { Button, Checkbox, Form, Input, message } from "antd";
 import { useNavigate } from "react-router-dom";
 import style from "./index.module.scss";
+import { login } from "src/request/Test";
 
 const Login: React.FC = () => {
   const [form] = Form.useForm();
   const navigate = useNavigate();
 
-  const onFinish = (values: any) => {
+  const onFinish = async (values: any) => {
     console.log("校验成功表单数据为:", values);
     // 调用接口判断是否登录成功
-    message.success("登录成功");
-    navigate("/home/users");
-    // message.error("登录失败");
+    const result = await login(values);
+    const { message: axiosMessage, status, token } = result.data;
+    message.success(axiosMessage);
+    if (status) {
+      localStorage.setItem("token", token);
+      navigate("/home/users");
+    }
   };
 
   const onFinishFailed = (errorInfo: any) => {
