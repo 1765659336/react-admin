@@ -1,46 +1,11 @@
-import {
-  DesktopOutlined,
-  FileOutlined,
-  PieChartOutlined,
-  TeamOutlined,
-  UserOutlined,
-} from "@ant-design/icons";
-
 import { Menu, MenuProps } from "antd";
 import { useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 
 type MenuItem = Required<MenuProps>["items"][number];
 
-const items: MenuItem[] = [
-  {
-    label: "Test",
-    key: "/home/col",
-    icon: <FileOutlined />,
-    children: [
-      { label: "col1", key: "/home/col1", icon: <PieChartOutlined /> },
-      { label: "col2", key: "/home/col2", icon: <DesktopOutlined /> },
-    ],
-  },
-  {
-    label: "Test",
-    key: "/home/manage",
-    icon: <FileOutlined />,
-    children: [
-      {
-        label: "系统管理",
-        key: "home/manage/system",
-        icon: <TeamOutlined />,
-        children: [
-          { label: "用户管理", key: "/home/users", icon: <UserOutlined /> },
-          { label: "角色管理", key: "/home/roles", icon: <DesktopOutlined /> },
-        ],
-      },
-    ],
-  },
-];
-
-const MainMenu: React.FC = () => {
+const MainMenu: React.FC<{ items: MenuItem[] }> = (state) => {
+  const { items } = state;
   const navigate = useNavigate();
 
   // 当前的路由信息，在一开始来到home时，菜单选中样式对应路由路径
@@ -90,10 +55,10 @@ const MainMenu: React.FC = () => {
 
   // 展开/收缩
   const onOpenChange: MenuProps["onOpenChange"] = (keys: string[]) => {
-    if(levelOneArr.includes(keys[keys.length - 1])){
+    if (levelOneArr.includes(keys[keys.length - 1])) {
       // 如果点击的是一级菜单，将展开当前点击的一级菜单，关闭其它所有的展开，实现只能同时展开一个一级菜单
       setOpenKeys([keys[keys.length - 1]]);
-    }else {
+    } else {
       setOpenKeys(keys);
     }
   };
