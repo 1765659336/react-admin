@@ -13,6 +13,4 @@ react18 + react-hooks + react-router@6 + react-redux + redux-thunk +  less + ant
 
 终端路径react-admin18\ : `npm i ` 下载依赖包
 
-终端路径react-admin18\server : `node index.js` 启动模拟登录后端接口
-
 终端路径react-admin18\ : `npm run dev` 启动项目
