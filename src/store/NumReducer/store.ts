@@ -1,4 +1,5 @@
 type IStoreNum = IStore<{ num: number }>;
+
 const store: IStoreNum = {
   state: {
     num: 20,
