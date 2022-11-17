@@ -1,7 +1,7 @@
 import React from "react";
 import { Button, Checkbox, Form, Input, message } from "antd";
 import { useNavigate } from "react-router-dom";
-import style from "./index.module.scss";
+import style from "./index.module.less";
 import { login } from "src/request/Test";
 
 const Login: React.FC = () => {
@@ -11,13 +11,15 @@ const Login: React.FC = () => {
   const onFinish = async (values: any) => {
     console.log("校验成功表单数据为:", values);
     // 调用接口判断是否登录成功
-    const result = await login(values);
-    const { message: axiosMessage, status, token } = result.data;
-    message.success(axiosMessage);
-    if (status) {
-      localStorage.setItem("token", token);
-      navigate("/home/users");
-    }
+    // const result = await login(values);
+    // const { message: axiosMessage, status, token } = result.data;
+    // message.success(axiosMessage);
+    // if (status) {
+    //   localStorage.setItem("token", token);
+    //   navigate("/home/users");
+    // }
+    localStorage.setItem("token", "token");
+    navigate("/home/users");
   };
 
   const onFinishFailed = (errorInfo: any) => {

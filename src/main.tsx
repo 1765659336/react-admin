@@ -6,7 +6,7 @@ import "reset-css";
 // Ui框架的样式
 import "antd/dist/antd.css";
 // 系统样式
-import "src/assets/styles/global.scss";
+import "src/assets/styles/global.less";
 
 // 路由模式
 import { BrowserRouter } from "react-router-dom";

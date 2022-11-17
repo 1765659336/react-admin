@@ -1,6 +1,6 @@
 import { Breadcrumb, Layout, Button } from "antd";
 import React, { useState } from "react";
-import style from "./index.module.scss";
+import style from "./index.module.less";
 import { Outlet } from "react-router-dom";
 import MainMenu from "src/components/MainMenu";
 import { useNavigate, useLocation } from "react-router-dom";
