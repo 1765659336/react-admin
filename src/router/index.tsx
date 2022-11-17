@@ -7,6 +7,9 @@ const Col2 = lazy(() => import("../components/Cop2"));
 const NotFonud = lazy(() => import("../views/NotFonud"));
 const Role = lazy(() => import("../views/Role"));
 const User = lazy(() => import("../views/User"));
+const NewsWrite = lazy(() => import("../views/News/NewsWrite"));
+const NewsDraft = lazy(() => import("../views/News/NewsDraft"));
+const NewsClassification = lazy(() => import("../views/News/NewsClassification"));
 
 // Navigate重定向组件
 import { Navigate } from "react-router-dom";
@@ -47,6 +50,24 @@ const routes = [
       {
         path: "/home/roles",
         element: withLoadingComponent(<Role />),
+      },
+    ],
+  },
+  {
+    path: "/news",
+    element: <Home />,
+    children: [
+      {
+        path: "/news/manage/write",
+        element: withLoadingComponent(<NewsWrite />),
+      },
+      {
+        path: "/news/manage/draft",
+        element: withLoadingComponent(<NewsDraft />),
+      },
+      {
+        path: "/news/manage/classification",
+        element: withLoadingComponent(<NewsClassification />),
       },
     ],
   },

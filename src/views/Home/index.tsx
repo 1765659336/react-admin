@@ -1,5 +1,5 @@
 import { Breadcrumb, Layout, Button } from "antd";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import style from "./index.module.scss";
 import { Outlet } from "react-router-dom";
 import MainMenu from "src/components/MainMenu";
@@ -56,18 +56,40 @@ const App: React.FC = () => {
         },
       ],
     },
+    {
+      label: "新闻管理",
+      key: "/news/manage",
+      icon: <FileOutlined />,
+      children: [
+        {
+          label: "撰写新闻",
+          key: "/news/manage/write",
+          icon: <TeamOutlined />,
+        },
+        {
+          label: "草稿箱",
+          key: "/news/manage/draft",
+          icon: <TeamOutlined />,
+        },
+        {
+          label: "新闻分类",
+          key: "/news/manage/classification",
+          icon: <TeamOutlined />,
+        },
+      ],
+    },
   ];
   const breadcrumbArr: Array<string> = [];
 
   const recursion = (items: MenuItem[]) => {
     for (const iterator of items) {
       if (
-        (iterator?.key === location.pathname) || 
+        iterator?.key === location.pathname ||
         (iterator &&
-        "children" in iterator &&
-        iterator.children &&
-        iterator.children.length !== 0 &&
-        recursion(iterator.children))
+          "children" in iterator &&
+          iterator.children &&
+          iterator.children.length !== 0 &&
+          recursion(iterator.children))
       ) {
         breadcrumbArr.push(iterator.label as string);
         return true;
