@@ -10,8 +10,8 @@
         "preview": "vite preview"
     },
     "dependencies": {
-        "@ant-design/icons": "^4.7.0",
-        "antd": "^4.24.0",
+        "@ant-design/icons": "^4.8.0",
+        "antd": "^5.0.0",
         "axios": "^1.1.3",
         "for-editor": "^0.3.5",
         "less": "^4.1.3",
