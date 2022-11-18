@@ -18,6 +18,7 @@ const StepOne: React.FC = React.forwardRef((props, ref) => {
                     });
             })
         },
+        formValue: StepOneFormRef.current.getFieldsValue(["newsTitle", "newsClassification"])
     }));
     const onFinish = (values: any) => {
         console.log("Success:", values);
@@ -60,14 +61,14 @@ const StepOne: React.FC = React.forwardRef((props, ref) => {
         >
             <Form.Item
                 label="新闻标题"
-                name="username"
+                name="newsTitle"
                 rules={[{ required: true, message: "请输入新闻标题" }]}
             >
                 <Input />
             </Form.Item>
             <Form.Item
                 label="新闻分类"
-                name="password"
+                name="newsClassification"
                 rules={[{ required: true, message: "请选择新闻分类" }]}
             >
                 <Select

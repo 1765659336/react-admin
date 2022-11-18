@@ -8,8 +8,10 @@ const NotFonud = lazy(() => import("../views/NotFonud"));
 const Role = lazy(() => import("../views/Role"));
 const User = lazy(() => import("../views/User"));
 const NewsWrite = lazy(() => import("../views/News/NewsWrite"));
-const NewsDraft = lazy(() => import("../views/News/NewsDraft"));
-const NewsClassification = lazy(() => import("../views/News/NewsClassification"));
+const NewsDraftList = lazy(() => import("../views/News/NewsDraftList"));
+const NewsDraftDetails = lazy(() => import("../views/News/NewsDraftDetails"));
+const NewsClassificationList = lazy(() => import("../views/News/NewsClassificationList"));
+const NewsClassificationDetails = lazy(() => import("../views/News/NewsClassificationDetails"));
 
 // Navigate重定向组件
 import { Navigate } from "react-router-dom";
@@ -62,12 +64,20 @@ const routes = [
         element: withLoadingComponent(<NewsWrite />),
       },
       {
-        path: "/news/manage/draft",
-        element: withLoadingComponent(<NewsDraft />),
+        path: "/news/manage/draft/list",
+        element: withLoadingComponent(<NewsDraftList />),
       },
       {
-        path: "/news/manage/classification",
-        element: withLoadingComponent(<NewsClassification />),
+        path: "/news/manage/draft/details",
+        element: withLoadingComponent(<NewsDraftDetails />),
+      },
+      {
+        path: "/news/manage/classification/list",
+        element: withLoadingComponent(<NewsClassificationList />),
+      },
+      {
+        path: "/news/manage/classification/details",
+        element: withLoadingComponent(<NewsClassificationDetails />),
       },
     ],
   },

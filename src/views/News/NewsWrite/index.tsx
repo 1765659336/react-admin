@@ -23,7 +23,7 @@ const NewsWrite: React.FC = () => {
         },
         {
             title: '新闻提交',
-            description: "保存草稿",
+            description: "保存草稿,提交审核",
         },
     ]
 
@@ -50,6 +50,7 @@ const NewsWrite: React.FC = () => {
 
     return (
         <>
+            <FooterButtons stepMessage={stepMessage} stepCurrent={stepCurrent} changeStepCurrent={changeStepCurrent} />
             <PageHeader
                 title="撰写新闻"
                 subTitle="按步骤操作"
@@ -58,8 +59,7 @@ const NewsWrite: React.FC = () => {
                 current={stepCurrent}
                 items={stepMessage}
             />
-            <Content stepCurrent={stepCurrent} ref={contentRef} />
-            <FooterButtons stepMessage={stepMessage} stepCurrent={stepCurrent} changeStepCurrent={changeStepCurrent} />
+            <Content ref={contentRef} stepCurrent={stepCurrent} stepMessage={stepMessage} />
         </>
     )
 }

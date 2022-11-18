@@ -8,7 +8,7 @@ const MainMenu: React.FC<{ items: MenuItem[] }> = (state) => {
   const { items } = state;
   const navigate = useNavigate();
 
-  // 当前的路由信息，在一开始来到home时，菜单选中样式对应路由路径
+  // 当前的路由信息,在一开始来到home时,菜单选中样式对应路由路径
   const location = useLocation();
 
   // 首次渲染匹配动态递归应该展开的菜单
