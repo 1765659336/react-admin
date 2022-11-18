@@ -6,6 +6,7 @@
     "scripts": {
         "dev": "vite --host --port 10086 --open",
         "build": "tsc && vite build",
+        "build-noTsc": "vite build",
         "preview": "vite preview"
     },
     "dependencies": {
