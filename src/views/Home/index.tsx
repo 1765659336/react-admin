@@ -72,18 +72,8 @@ const App: React.FC = () => {
           icon: <TeamOutlined />,
         },
         {
-          label: "草稿箱新闻详情",
-          key: "/news/manage/draft/details",
-          icon: <TeamOutlined />,
-        },
-        {
           label: "新闻审核列表",
           key: "/news/manage/classification/list",
-          icon: <TeamOutlined />,
-        },
-        {
-          label: "审核列表新闻详情",
-          key: "/news/manage/classification/details",
           icon: <TeamOutlined />,
         },
       ],

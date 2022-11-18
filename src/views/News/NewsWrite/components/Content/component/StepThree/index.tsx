@@ -1,7 +1,7 @@
 import React from 'react';
 import { Button, StepProps } from 'antd';
-import MarkDetail from "src/components/MarkDownShow";
 import { useNavigate } from "react-router-dom";
+import ShowNews from "src/views/News/components/ShowNews";
 
 interface Props {
     newsFormValue: { newsTitle: string, newsClassification: string },
@@ -28,12 +28,7 @@ const StepThree: React.FC<Props> = ({ newsFormValue, newsContent, stepCurrent, s
 
     return (
         <>
-            <div>新闻标题:{newsFormValue?.newsTitle}</div>
-            <div>新闻分类:{newsFormValue?.newsClassification}</div>
-            <div>
-                <div>新闻内容</div>
-                <MarkDetail content={newsContent} />
-            </div>
+            <ShowNews newsTitle={newsFormValue?.newsTitle} newsClassification={newsFormValue?.newsClassification} content={newsContent} />
             <div>
                 {stepCurrent === stepMessage.length - 1 ? <Button type="primary" size={"large"} onClick={saveDraftBox}>
                     保存草稿箱

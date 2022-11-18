@@ -9,9 +9,8 @@ const Role = lazy(() => import("../views/Role"));
 const User = lazy(() => import("../views/User"));
 const NewsWrite = lazy(() => import("../views/News/NewsWrite"));
 const NewsDraftList = lazy(() => import("../views/News/NewsDraftList"));
-const NewsDraftDetails = lazy(() => import("../views/News/NewsDraftDetails"));
+const NewsDraftDetails = lazy(() => import("../views/News/NewsDetails"));
 const NewsClassificationList = lazy(() => import("../views/News/NewsClassificationList"));
-const NewsClassificationDetails = lazy(() => import("../views/News/NewsClassificationDetails"));
 
 // Navigate重定向组件
 import { Navigate } from "react-router-dom";
@@ -68,16 +67,12 @@ const routes = [
         element: withLoadingComponent(<NewsDraftList />),
       },
       {
-        path: "/news/manage/draft/details",
-        element: withLoadingComponent(<NewsDraftDetails />),
-      },
-      {
         path: "/news/manage/classification/list",
         element: withLoadingComponent(<NewsClassificationList />),
       },
       {
-        path: "/news/manage/classification/details",
-        element: withLoadingComponent(<NewsClassificationDetails />),
+        path: "/news/manage/newsItem/details",
+        element: withLoadingComponent(<NewsDraftDetails />),
       },
     ],
   },

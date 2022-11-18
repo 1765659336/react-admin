@@ -35,21 +35,26 @@ const MainMenu: React.FC<{ items: MenuItem[] }> = (state) => {
   };
   recursion(items);
 
-  // 所有一级菜单key的集合
-  const levelOneArr: Array<string> = [];
-
-  for (const iterator of items) {
-    if (iterator) {
-      levelOneArr.push(iterator.key as string);
+  // 获取所有一级菜单
+  const getLevelOneArr = () => {
+    const init = [];
+    for (const iterator of items) {
+      if (iterator) {
+        init.push(iterator.key as string);
+      }
     }
+    return init;
   }
 
+  // 所有一级菜单key的集合
+  const levelOneArr: Array<string> = getLevelOneArr();
+
+  
   // 设置展开的下拉菜单
   const [openKeys, setOpenKeys] = useState<Array<string>>(openKey);
 
   // 菜单点击事件
   const menuClick = (e: { key: string }) => {
-    console.log("点击了菜单", e.key);
     navigate(e.key);
   };
 
@@ -72,6 +77,7 @@ const MainMenu: React.FC<{ items: MenuItem[] }> = (state) => {
       openKeys={openKeys}
       onClick={menuClick}
       onOpenChange={onOpenChange}
+      selectedKeys={[location.pathname]}
     />
   );
 };

@@ -26,15 +26,15 @@ const Content: React.FC<Props> = React.forwardRef(({ stepCurrent, stepMessage },
         <div className={style.contentContainer} ref={divContainerRef}>
             <React.Fragment>
                 {/* 因为上一步下一步需要缓存之前填写的内容，所以不能销毁，而是隐藏 */}
-                <li className={stepCurrent === 0 ? "" : style.display}>
+                <div className={stepCurrent === 0 ? "" : style.display}>
                     <StepOne ref={StepOneRef} />
-                </li>
-                <li className={stepCurrent === 1 ? "" : style.display}>
+                </div>
+                <div className={stepCurrent === 1 ? "" : style.display}>
                     <StepTwo ref={StepTwoRef} />
-                </li>
-                <li className={stepCurrent === 2 ? "" : style.display}>
+                </div>
+                <div className={stepCurrent === 2 ? "" : style.display}>
                     <StepThree newsFormValue={StepOneRef?.current?.formValue} newsContent={StepTwoRef?.current?.newsContent} stepCurrent={stepCurrent} stepMessage={stepMessage} />
-                </li>
+                </div>
             </React.Fragment>
         </div>
     );
