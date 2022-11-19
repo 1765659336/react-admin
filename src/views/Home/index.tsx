@@ -67,13 +67,13 @@ const App: React.FC = () => {
           icon: <TeamOutlined />,
         },
         {
-          label: "草稿箱",
-          key: "/news/manage/draft",
+          label: "草稿箱新闻列表",
+          key: "/news/manage/draft/list",
           icon: <TeamOutlined />,
         },
         {
-          label: "新闻分类",
-          key: "/news/manage/classification",
+          label: "新闻审核列表",
+          key: "/news/manage/classification/list",
           icon: <TeamOutlined />,
         },
       ],

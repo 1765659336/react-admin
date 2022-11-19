@@ -1,9 +1,11 @@
 import { PageHeader, Steps, StepProps } from 'antd';
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import Content from "./components/Content";
 import FooterButtons from "./components/FooterButtons";
 
 const NewsWrite: React.FC = () => {
+
+    const contentRef = useRef(null);
 
     // 步骤条步数
     const [stepCurrent, setStepCurrent] = useState<number>(0);
@@ -21,7 +23,7 @@ const NewsWrite: React.FC = () => {
         },
         {
             title: '新闻提交',
-            description: "保存草稿",
+            description: "保存草稿,提交审核",
         },
     ]
 
@@ -32,13 +34,23 @@ const NewsWrite: React.FC = () => {
         const willChangedStepCurrent = stepNumber + stepCurrent;
 
         if (willChangedStepCurrent >= 0 && willChangedStepCurrent < stepMessage.length) {
-            setStepCurrent(willChangedStepCurrent)
+
+            // 当点击下一步时，触发当前步骤校验
+            if (stepNumber > 0) {
+                contentRef.current.submit(willChangedStepCurrent - 1).then(() => {
+                    setStepCurrent(willChangedStepCurrent);
+                }).catch(() => {
+                })
+            } else {
+                setStepCurrent(willChangedStepCurrent);
+            }
         }
 
     }
 
     return (
         <>
+            <FooterButtons stepMessage={stepMessage} stepCurrent={stepCurrent} changeStepCurrent={changeStepCurrent} />
             <PageHeader
                 title="撰写新闻"
                 subTitle="按步骤操作"
@@ -47,8 +59,7 @@ const NewsWrite: React.FC = () => {
                 current={stepCurrent}
                 items={stepMessage}
             />
-            <Content stepCurrent={stepCurrent} />
-            <FooterButtons stepMessage={stepMessage} stepCurrent={stepCurrent} changeStepCurrent={changeStepCurrent} />
+            <Content ref={contentRef} stepCurrent={stepCurrent} stepMessage={stepMessage} />
         </>
     )
 }
