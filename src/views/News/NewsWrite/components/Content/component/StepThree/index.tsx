@@ -19,10 +19,9 @@ const StepThree: React.FC<Props> = ({
 }) => {
   // 保存草稿箱
   const saveDraftBox = () => {
-    console.log(StepOneFormRef, newsContent);
     addNews({ newsTitle, newsClassification, content: newsContent }).then(
-      (res) => {
-        if(res.data.status){
+      (res: any) => {
+        if (res.data.status) {
           navigate("/news/manage/draft/list", { replace: true, state: {} });
         }
       }
