@@ -1,4 +1,5 @@
 import axios from "axios";
+import { message } from "antd";
 
 const request = axios.create({
   timeout: 5000,
@@ -16,6 +17,10 @@ request.interceptors.request.use(
 
 request.interceptors.response.use(
   (response: any) => {
+    const {
+      data: { status, message: messageInfo },
+    } = response;
+    !status && message.error(messageInfo);
     return response;
   },
   (error: any) => {
