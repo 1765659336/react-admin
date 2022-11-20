@@ -2,6 +2,7 @@ import React from "react";
 import { Button, StepProps } from "antd";
 import { useNavigate } from "react-router-dom";
 import ShowNews from "src/views/News/components/ShowNews";
+import { addNews } from "src/request/News";
 
 interface Props {
   StepOneFormRef: any;
@@ -19,7 +20,13 @@ const StepThree: React.FC<Props> = ({
   // 保存草稿箱
   const saveDraftBox = () => {
     console.log(StepOneFormRef, newsContent);
-    navigate("/news/manage/draft/list", { replace: true, state: {} });
+    addNews({ newsTitle, newsClassification, content: newsContent }).then(
+      (res) => {
+        if(res.data.status){
+          navigate("/news/manage/draft/list", { replace: true, state: {} });
+        }
+      }
+    );
   };
 
   // 提交审核

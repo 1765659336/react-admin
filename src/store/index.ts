@@ -7,10 +7,12 @@ import {
 import reduxThunk from "redux-thunk";
 import numReducer from "./NumReducer";
 import arrReducer from "./ArrReducer";
+import commonReducer from "./CommonReducer";
 
 const reducers = combineReducers({
   numReducer,
   arrReducer,
+  commonReducer,
 });
 
 // 为了让浏览器正常使用redux-devetools,redux-thunk插件关联到redux-devetools

@@ -1,5 +1,6 @@
-import React, { useRef, useImperativeHandle } from "react";
+import React, { useRef, useImperativeHandle, useEffect } from "react";
 import { Form, Input, Select, FormInstance, message } from "antd";
+import { useSelector, useDispatch } from "react-redux";
 
 const StepOne: React.FC = React.forwardRef((props, ref) => {
   const StepOneFormRef = useRef<FormInstance<any> | null>(null);
@@ -20,6 +21,31 @@ const StepOne: React.FC = React.forwardRef((props, ref) => {
     },
     StepOneFormRef,
   }));
+
+  const { newsClassification: classificationOptions } = useSelector(
+    (state: RootState) => ({
+      newsClassification: state.commonReducer.newsClassification,
+    })
+  );
+
+  const dispatch = useDispatch();
+
+  const getNewsClassification = () => {
+    dispatch((dis: Function) => {
+      dispatch({
+        actionName: "actionAsync",
+        type: "getNewsClassificationAsync",
+        dis: dis,
+      });
+    });
+  };
+
+  useEffect(() => {
+    if (classificationOptions.length === 0) {
+      getNewsClassification();
+    }
+  }, []);
+
   const onFinish = (values: any) => {
     console.log("Success:", values);
   };
@@ -35,21 +61,6 @@ const StepOne: React.FC = React.forwardRef((props, ref) => {
   const onSearch = (value: string) => {
     console.log("search:", value);
   };
-
-  const classificationOptions = [
-    {
-      value: "热点",
-      label: "热点",
-    },
-    {
-      value: "民生",
-      label: "民生",
-    },
-    {
-      value: "军事",
-      label: "军事",
-    },
-  ];
 
   return (
     <Form

@@ -19,7 +19,7 @@ const NewsWrite: React.FC = () => {
         {
             title: '新闻内容',
             description: "新闻主体内容",
-            subTitle: 'Left 00:00:08',
+            subTitle: '支持MarkDown语法',
         },
         {
             title: '新闻提交',

@@ -12,13 +12,20 @@ interface Window {
 declare type StoreAction = {
   changeNum?: Function;
   changeArr?: Function;
+  getNewsClassification?: Function;
 };
 
 declare type StoreActionAsync = {
   changeNumAsync?: Function;
+  getNewsClassificationAsync?: Function;
 };
 declare interface IStore<T> {
   state?: T;
   action: StoreAction;
   actionAsync: StoreActionAsync;
+}
+
+declare interface ISelectOption {
+  value: number;
+  label: string;
 }

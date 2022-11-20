@@ -7,5 +7,5 @@ interface ILoginMessage {
 }
 
 export const login = (data: ILoginMessage) => {
-  return request.post("api/login",data);
+  return request.post("/api/login",data);
 };
