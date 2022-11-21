@@ -17,7 +17,7 @@ import { Navigate } from "react-router-dom";
 
 const withLoadingComponent = (comp: JSX.Element) => {
   return (
-    <React.Suspense fallback={<div>loading...</div>}>{comp}</React.Suspense>
+    <React.Suspense fallback={<div>组件懒加载loading...</div>}>{comp}</React.Suspense>
   );
 };
 

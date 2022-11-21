@@ -18,9 +18,9 @@ request.interceptors.request.use(
 request.interceptors.response.use(
   (response: any) => {
     const {
-      data: { status, message: messageInfo },
+      data: { status, content: content },
     } = response;
-    !status && message.error(messageInfo);
+    !status && message.error(content);
     return response;
   },
   (error: any) => {

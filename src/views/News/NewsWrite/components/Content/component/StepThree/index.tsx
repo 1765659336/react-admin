@@ -46,6 +46,7 @@ const StepThree: React.FC<Props> = ({
         newsClassification={newsClassification}
         content={newsContent}
         type="view"
+        id={""}
         previousPath=""
       />
       <div>

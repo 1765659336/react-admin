@@ -118,7 +118,7 @@ const App: React.FC = () => {
             退出登录
           </Button>
         </Header>
-        <Content style={{ margin: "0 16px" }}>
+        <Content style={{ margin: "0 16px" }} className={style.skeletonPostion}>
           <Breadcrumb style={{ margin: "16px 0" }}>
             {BreadcrumbItems}
           </Breadcrumb>

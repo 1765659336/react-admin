@@ -1,13 +1,15 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router";
 import { Form, Input, Select, FormInstance, message, Button } from "antd";
 import MarkDetail from "src/components/MarkDownShow";
 import MarkDownEdit from "src/components/MarkDownEdit";
+import { useDispatch, useSelector } from "react-redux";
+import { putNews } from "src/request/News";
 
 interface Props {
-    newsTitle: string, newsClassification: string, content: string, type: string, previousPath: string
+    newsTitle: string, newsClassification: number, content: string, type: string, id: string, previousPath: string
 }
-const ShowNews: React.FC<Props> = ({ newsTitle, newsClassification, content, type, previousPath }) => {
+const ShowNews: React.FC<Props> = ({ newsTitle, newsClassification, content, type, id, previousPath }) => {
     const StepOneFormRef = useRef<FormInstance<any> | null>(null);
 
     const [newsContent, setNewsContent] = useState(content);
@@ -15,7 +17,7 @@ const ShowNews: React.FC<Props> = ({ newsTitle, newsClassification, content, typ
     const navigate = useNavigate();
 
     // 是否可编辑
-    const isCanEdit = type === 'edit'
+    const isCanEdit = type === 'edit';
 
     const onFinish = (values: any) => {
         console.log("Success:", values);
@@ -38,35 +40,56 @@ const ShowNews: React.FC<Props> = ({ newsTitle, newsClassification, content, typ
             ?.validateFields()
             .then((value) => {
                 console.log("校验成功", value);
-                message.success("保存成功");
-                navigate(previousPath, { replace: true })
+                putNews({ ...value, ...{ id } }).then((res: any) => {
+                    if (res.data.status) {
+                        message.success("保存成功");
+                        navigate(previousPath, { replace: true })
+                    }
+                })
             })
             .catch(() => {
                 message.warning("请按提示输入内容");
             });
     }
 
-    const classificationOptions = [
-        {
-            value: "热点",
-            label: "热点",
-        },
-        {
-            value: "民生",
-            label: "民生",
-        },
-        {
-            value: "军事",
-            label: "军事",
-        },
-    ];
+    const { newsClassification: classificationOptions } = useSelector(
+        (state: RootState) => ({
+            newsClassification: state.commonReducer.newsClassification,
+        })
+    );
+
+    const dispatch = useDispatch();
+
+    const getNewsClassification = () => {
+        dispatch((dis: Function) => {
+            dispatch({
+                actionName: "actionAsync",
+                type: "getNewsClassificationAsync",
+                dis: dis,
+            });
+        });
+    };
+
+    const getNewsByMarkDownEdit = (value: string) => {
+        StepOneFormRef && StepOneFormRef.current.setFieldsValue(
+            { newsTitle, newsClassification, value }
+        );
+    }
+
+    useEffect(() => {
+        StepOneFormRef && StepOneFormRef.current.setFieldsValue(
+            { newsTitle, newsClassification, content }
+        );
+        if (classificationOptions.length === 0) {
+            getNewsClassification();
+        }
+    }, []);
 
     return (
         <>
             <Form
                 labelCol={{ span: 4 }}
                 wrapperCol={{ span: 16 }}
-                initialValues={{ newsTitle, newsClassification, content }}
                 onFinish={onFinish}
                 onFinishFailed={onFinishFailed}
                 ref={StepOneFormRef}
@@ -101,7 +124,7 @@ const ShowNews: React.FC<Props> = ({ newsTitle, newsClassification, content, typ
                     name="content"
                     rules={[{ required: true, message: "请输入新闻内容" }]}
                 >
-                    {isCanEdit ? <MarkDownEdit value={newsContent} onChange={(value: string) => setNewsContent(value)} /> : <MarkDetail content={content} />}
+                    {isCanEdit ? <MarkDownEdit contentValue={newsContent} onChange={(value: string) => setNewsContent(value)} getNewsByMarkDownEdit={getNewsByMarkDownEdit} /> : <MarkDetail content={content} />}
                 </Form.Item>
                 {isCanEdit ? <Form.Item
                     label=""
