@@ -15,3 +15,14 @@ export const addNews = VR(
   },
   1000
 );
+
+export const getNews = VR(
+  (getNewsObj: {
+    newsStatus?: number;
+    newsClassification?: number;
+    id?: number;
+  }) => {
+    return request.get("/api/getNews", getNewsObj);
+  },
+  1000
+);

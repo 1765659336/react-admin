@@ -1,13 +1,14 @@
-import { message, Space, Table, Tag } from 'antd';
+import { message, Space, Table, Tag, Skeleton } from 'antd';
 import { ColumnsType } from 'antd/es/table';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate, useLocation } from 'react-router';
+import { getNews } from 'src/request/News';
 
 interface DataType {
     id: string,
     key: string;
     newsTitle: string;
-    tags: string[];
+    newsClassificationText: string
 }
 
 const NewsDraftList: React.FC = () => {
@@ -35,26 +36,37 @@ const NewsDraftList: React.FC = () => {
         navigate("/news/manage/newsItem/details", { replace: false, state: { id, type: "view", previousPath: location.pathname, previousTitle: "草稿箱新闻详情查看" } });
     }
 
-    const dataSource: DataType[] = [
-        {
-            id: '001',
-            key: '1',
-            newsTitle: 'John Brown',
-            tags: ['热点'],
-        },
-        {
-            id: '002',
-            key: '2',
-            newsTitle: 'Jim Green',
-            tags: ['民生'],
-        },
-        {
-            id: '003',
-            key: '3',
-            newsTitle: 'Joe Black',
-            tags: ['军事'],
-        },
-    ];
+    // const dataSource: DataType[] = [
+    //     {
+    //         id: '001',
+    //         key: '1',
+    //         newsTitle: 'John Brown',
+    //         tags: ['热点'],
+    //     },
+    //     {
+    //         id: '002',
+    //         key: '2',
+    //         newsTitle: 'Jim Green',
+    //         tags: ['民生'],
+    //     },
+    //     {
+    //         id: '003',
+    //         key: '3',
+    //         newsTitle: 'Joe Black',
+    //         tags: ['军事'],
+    //     },
+    // ];
+
+    const [dataSource, setDataSource] = useState([]);
+
+    const [isSkeleton, setIsSkeleton] = useState(false);
+
+    useEffect(() => {
+        getNews({ newsStatus: 1 }).then((res: any) => {
+            setDataSource(res.data.content);
+            setIsSkeleton(true)
+        })
+    }, [])
 
     const columns: ColumnsType<DataType> = [
         {
@@ -66,16 +78,10 @@ const NewsDraftList: React.FC = () => {
             title: '新闻分类',
             key: 'tags',
             dataIndex: 'address',
-            render: (_, { tags }) => (
-                <>
-                    {tags.map(tag => {
-                        return (
-                            <Tag color={'volcano'} key={tag}>
-                                {tag.toUpperCase()}
-                            </Tag>
-                        );
-                    })}
-                </>
+            render: (_, { newsClassificationText }) => (
+                <Tag color={'volcano'} key={newsClassificationText}>
+                    {newsClassificationText.toUpperCase()}
+                </Tag>
             ),
         },
         {
@@ -95,7 +101,9 @@ const NewsDraftList: React.FC = () => {
     ];
 
     return (
-        <Table columns={columns} dataSource={dataSource} />
+        <>
+            {isSkeleton ? <Table columns={columns} dataSource={dataSource} /> : <Skeleton />}
+        </>
     )
 }
 
