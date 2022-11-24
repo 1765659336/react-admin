@@ -4,6 +4,7 @@ import React, { useEffect, useState } from "react";
 import { useNavigate, useLocation } from "react-router";
 import TableSkeleton from "src/components/TableSkeleton";
 import { getNews, putNewsStatus } from "src/request/News";
+import { NewsStatus } from "src/type/enum";
 
 interface DataType {
   id: string;
@@ -97,17 +98,25 @@ const NewsClassificationListPure: React.FC<Props> = ({ setIsSkeleton }) => {
       render: (_, { newsStatus, id }) => {
         return (
           <Space size="middle">
-            {newsStatus === 2 ? (
-              <a onClick={() => changeNewsStatus(id, 4)}>审核通过</a>
+            {newsStatus === NewsStatus["审核中"] ? (
+              <a onClick={() => changeNewsStatus(id, NewsStatus["未发布"])}>
+                审核通过
+              </a>
             ) : null}
-            {newsStatus === 2 ? (
-              <a onClick={() => changeNewsStatus(id, 3)}>驳回</a>
+            {newsStatus === NewsStatus["审核中"] ? (
+              <a onClick={() => changeNewsStatus(id, NewsStatus["驳回"])}>
+                驳回
+              </a>
             ) : null}
-            {newsStatus === 4 ? (
-              <a onClick={() => changeNewsStatus(id, 5)}>发布</a>
+            {newsStatus === NewsStatus["未发布"] ? (
+              <a onClick={() => changeNewsStatus(id, NewsStatus["已发布"])}>
+                发布
+              </a>
             ) : null}
-            {newsStatus === 5 ? (
-              <a onClick={() => changeNewsStatus(id, 4)}>下架</a>
+            {newsStatus === NewsStatus["已发布"] ? (
+              <a onClick={() => changeNewsStatus(id, NewsStatus["未发布"])}>
+                下架
+              </a>
             ) : null}
             <a onClick={() => view(id)}>查看</a>
           </Space>
